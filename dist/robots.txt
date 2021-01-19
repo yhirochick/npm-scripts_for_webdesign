@@ -1,3 +1,0 @@
-# URLを書き換えて、コメントアウト(#)を消してください。
-# User-Agent: *
-# Sitemap: https://example.com/sitemap.xml
