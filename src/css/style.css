@@ -1,0 +1,8 @@
+
+.hoge {
+  display: flex;
+  justify-content: center;
+}
+.hoge * {
+  font-size: 20px;
+}
