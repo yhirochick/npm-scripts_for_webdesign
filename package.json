@@ -4,13 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build:pug2html": "pug src/pug/ --hierarchy -o product/ -P",
+    "build:css2cssprefix": "postcss src/css/style.css -u autoprefixer -o product/css/style.css",
+    "build:img": "node imagemin-prod.js",
+    "build:js": "cpx \"src/js/*.js\" product/js/",
+    "build:tailwind": "cross-env NODE_ENV=\"production\" tailwindcss-cli build src/css/tailwind.css -c tailwind.config.js -o product/css/tailwind.css",
     "watch:pug2html": "pug src/pug/ --hierarchy -o dist/ -w -P",
     "start:server": "browser-sync start -s dist -w src/*.pug src/css/*.css src/js/*.js",
     "compile:css2cssprefix": "postcss src/css/style.css -u autoprefixer -o dist/css/style.css",
     "watch:css2cssprefix": "chokidar \"src/css/\" --command \"npm run compile:css2cssprefix\" --initial",
     "watch:js": "cpx \"src/js/*.js\" dist/js/ -w",
     "watch:img": "chokidar \"src/img/**/*\" -c \"node imagemin.js\" --initial",
-    "watch:all": "run-p watch:pug2html watch:js watch:css2cssprefix watch:img start:server"
+    "watch:all": "run-p watch:pug2html watch:js watch:css2cssprefix watch:img start:server",
+    "build": "rm -rf product/ && run-p build:*",
+    "tailwind-dev": "tailwindcss build src/css/tailwind.css -o dist/css/tailwind.css"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +27,7 @@
     "browser-sync": "^2.26.13",
     "chokidar-cli": "^2.1.0",
     "cpx": "^1.5.0",
+    "cross-env": "^7.0.3",
     "imagemin": "^7.0.1",
     "imagemin-gifsicle": "^7.0.0",
     "imagemin-keep-folder": "^5.3.2",
@@ -30,7 +38,9 @@
     "onchange": "^7.1.0",
     "postcss": "^8.2.4",
     "postcss-cli": "^8.3.1",
-    "pug-cli": "github:pugjs/pug-cli#master"
+    "pug-cli": "github:pugjs/pug-cli#master",
+    "tailwindcss": "^2.0.2",
+    "tailwindcss-cli": "^0.1.2"
   },
   "dependencies": {}
 }
